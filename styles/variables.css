@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "HelveticaNeueLTGeoLight";
+  src: url("./fonts/HELVETICA\ NEUE\ LT\ GEO\ 45\ LIGHT.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "HelveticaNeueLTGeoMedium";
+  src: url("./fonts/HELVETICA\ NEUE\ LT\ GEO\ 65\ MEDIUM.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "HelveticaNeueLTGeoBold";
+  src: url("./fonts/HELVETICA\ NEUE\ LT\ GEO\ 75\ BOLD.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  --font-light: "HelveticaNeueLTGeoLight", sans-serif;
+  --font-regular: "HelveticaNeueLTGeoMedium", sans-serif;
+  --font-bold: "HelveticaNeueLTGeoBold", sans-serif;
+  --btn-background: #ea4c38;
+  --btn-background-hover: #d53d2a;
+  --sec-btn-background: #ebf3f7;
+  --sec-btn-colod: #056596;
+  --border-color-invalid: #e62933;
+  --filter: invert(40%) sepia(33%) saturate(5325%) hue-rotate(341deg)
+    brightness(96%) contrast(90%);
+}
