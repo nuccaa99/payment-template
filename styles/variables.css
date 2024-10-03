@@ -1,6 +1,6 @@
 @font-face {
   font-family: "HelveticaNeueLTGeoLight";
-  src: url("./fonts/HELVETICA\ NEUE\ LT\ GEO\ 45\ LIGHT.woff") format("woff");
+  src: url("./fonts/HELVETICA\ NEUE\ LT\ GEO\ 55\ ROMAN.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
@@ -28,4 +28,5 @@
   --border-color-invalid: #e62933;
   --filter: invert(40%) sepia(33%) saturate(5325%) hue-rotate(341deg)
     brightness(96%) contrast(90%);
+  --border: 1px solid rgba(26, 29, 31, 0.08);
 }

@@ -9,9 +9,106 @@
   </head>
   <body>
     <section class="modal">
-      <div class="modal_contents">
-        <p>დახმარება</p>
+      <div class="modal_contents_container">
+        <!-- header -->
+        <header>
+          <img src="./assets/images/logo-geo.svg" class="model_header_logo" />
+          <div class="more_info_wrapper">
+            <img
+              src="./assets/images/more_info_icon.svg"
+              alt="more info icon"
+            />
+            <p class="more_info_txt">დახმარება</p>
+          </div>
+          <img
+            src="./assets/images/close.svg"
+            alt="close icon"
+            class="close_icon"
+          />
+        </header>
+        <!-- merchant and price first step -->
+        <div class="merchant_price_container">
+          <div class="merchant_wrapper">
+            <img
+              class="merchant_img"
+              src="./assets/images/merchant_icon.svg"
+              alt="merchant icon"
+            />
+            <div class="merchant_info_wrapper">
+              <h3 class="merchant_name">extra.ge</h3>
+              <p class="merchant_payment_status">Payment processing</p>
+              <p class="merchant_location">GE, Tbilisi</p>
+            </div>
+          </div>
+          <div class="price_iban_container">
+            <div class="price_wrapper">
+              <p class="price_title">თანხა</p>
+              <p class="price">258.00 ₾</p>
+            </div>
+            <div class="iban_wrapper">
+              <p class="iban_title">ანგარიში:</p>
+              <p class="iban">*********0479</p>
+            </div>
+          </div>
+        </div>
+        <!-- form first step  -->
+        <form class="card_info_form" onsubmit="showSecStep(event)">
+          <h3>ბარათის მონაცემები</h3>
+          <div class="card_info_input_wrapper">
+            <label for="iban" class="card_info_label">ბარათის ნომერი</label>
+            <input
+              class="card_info_input iban"
+              type="text"
+              name="iban"
+              id="iban"
+            />
+          </div>
+          <div class="card_info_date_cvv_wrapper">
+            <div class="card_info_input_wrapper date_cvv">
+              <label for="cardDate" class="card_info_label"
+                >მოქმედების ვადა</label
+              >
+              <input
+                class="card_info_input card_date"
+                type="text"
+                name="cardDate"
+                id="cardDate"
+              />
+            </div>
+            <div class="card_info_input_wrapper date_cvv">
+              <label for="cardCvv" class="card_info_label">CVC/CVV</label>
+              <input
+                class="card_info_input card_cvv"
+                type="text"
+                name="cardCvv"
+                id="cardCvv"
+              />
+            </div>
+          </div>
+          <button type="submit" class="form_btn">
+            გადახდა <span>( 258.00₾ )</span>
+          </button>
+        </form>
+        <footer>
+          <div class="footer_img_wrapper">
+            <img src="./assets/images/pci_icon.svg" alt="pci icon" />
+            <img src="./assets/images/visa_icon.svg" alt="visa icon" />
+            <img
+              src="./assets/images/mastercard_icon.svg"
+              alt="mastercard icon"
+            />
+            <img src="./assets/images/ufc_icon.svg" alt="ufc icon" />
+          </div>
+          <div class="footer_copy_wrapper">
+            <img
+              src="./assets/images/copyright_icon.svg"
+              alt="Copyright icon"
+            />
+            <p>CREDO BANK</p>
+          </div>
+        </footer>
       </div>
     </section>
+    <script src="script.js"></script>
   </body>
 </html>
