@@ -52,8 +52,8 @@ header {
   right: 19px;
 }
 
-/* merchant price variables */
-.merchant_price_container {
+/* merchant amount variables */
+.merchant_amount_container {
   padding: 8px 82px 16px 82px;
   display: flex;
   justify-content: space-between;
@@ -88,12 +88,12 @@ header {
   color: rgba(26, 29, 31, 0.7);
 }
 
-.price_iban_container {
+.amount_iban_container {
   display: flex;
   flex-direction: column;
   row-gap: 16px;
 }
-.price_wrapper,
+.amount_wrapper,
 .iban_wrapper {
   display: flex;
   flex-direction: column;
@@ -102,14 +102,14 @@ header {
 .iban_wrapper {
   display: none;
 }
-.price_title,
+.amount_title,
 .iban_title {
   font-family: var(--font-regular);
   font-size: 14px;
   color: rgba(26, 29, 31, 0.7);
 }
 
-.price,
+.amount,
 .iban {
   font-family: var(--font-regular);
   color: rgba(26, 29, 31, 1);

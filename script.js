@@ -21,14 +21,14 @@ const showSecStep = (e) => {
 
 // variables to change on third step
 
-const merchantAndPriceContainer = document.querySelector(
-  ".merchant_price_container"
+const merchantAndAmountContainer = document.querySelector(
+  ".merchant_amount_container"
 );
 const successCardContainer = document.querySelector(".success_card_container");
 
 const showThirdStep = (e) => {
   e.preventDefault();
-  merchantAndPriceContainer.style.display = "none";
+  merchantAndAmountContainer.style.display = "none";
   codeForm.style.display = "none";
   successCardContainer.style.display = "flex";
 };
