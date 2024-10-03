@@ -51,7 +51,7 @@
             </div>
           </div>
         </div>
-        <!-- form first step  -->
+        <!-- form on the first step  -->
         <form class="card_info_form" onsubmit="showSecStep(event)">
           <h3>ბარათის მონაცემები</h3>
           <div class="card_info_input_wrapper">
@@ -89,6 +89,47 @@
             გადახდა <span>( 258.00₾ )</span>
           </button>
         </form>
+        <!-- form on the second step  -->
+        <form class="code_form" onsubmit="showThirdStep(event)">
+          <label for="code" class="code_form_label"
+            >შეიყვანეთ ერთჯერადი კოდი
+            <input
+              class="code_form_input"
+              type="text"
+              name="code"
+              id="code"
+              placeholder="ერთჯერადი კოდი"
+            />
+          </label>
+          <div class="refresh_wrapper">
+            <img
+              src="./assets/images/refresh.svg"
+              alt="refresh icon"
+              class="refresh_icon"
+            />
+            <span>მიიღე ახალი კოდი</span>
+          </div>
+          <button type="submit" class="form_btn">დადასტურება</button>
+          <button type="submit" class="cancel_btn">გაუქმება</button>
+        </form>
+
+        <!-- section on third step -->
+
+        <div class="success_card_container">
+          <div class="success_icon_wrapper">
+            <img
+              src="./assets/images/success.svg"
+              alt="success icon"
+              class="success_icon"
+            />
+            <p class="success_title">გადახდა წარმატებით შესრულდა</p>
+          </div>
+          <div class="success_btns_wrapper">
+            <button type="submit" class="form_btn">დახურვა</button>
+            <button type="submit" class="receipt_btn">ქვითრის ბეჭდვა</button>
+          </div>
+        </div>
+
         <footer>
           <div class="footer_img_wrapper">
             <img src="./assets/images/pci_icon.svg" alt="pci icon" />
