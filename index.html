@@ -13,13 +13,7 @@
         <!-- header -->
         <header>
           <img src="./assets/images/logo-geo.svg" class="model_header_logo" />
-          <div class="more_info_wrapper">
-            <img
-              src="./assets/images/more_info_icon.svg"
-              alt="more info icon"
-            />
-            <p class="more_info_txt">დახმარება</p>
-          </div>
+
           <img
             src="./assets/images/close.svg"
             alt="close icon"
@@ -29,25 +23,33 @@
         <!-- merchant and amount first step -->
         <div class="merchant_amount_container">
           <div class="merchant_wrapper">
-            <img
-              class="merchant_img"
-              src="./assets/images/merchant_icon.svg"
-              alt="merchant icon"
-            />
+            <div class="merchant_img_wrapper">
+              <img
+                class="merchant_img"
+                src="https://via.placeholder.com/43"
+                alt="merchant icon"
+              />
+            </div>
             <div class="merchant_info_wrapper">
-              <h3 class="merchant_name">extra.ge</h3>
+              <h3 class="merchant_name">Merchant</h3>
               <p class="merchant_payment_status">Payment processing</p>
-              <p class="merchant_location">GE, Tbilisi</p>
+              <p class="merchant_location">
+                <span class="merchant_location_country_code">CC,</span>
+                <span class="merchant_location_city">city</span>
+              </p>
             </div>
           </div>
-          <div class="amount_iban_container">
+          <div class="amount_pan_container">
             <div class="amount_wrapper">
               <p class="amount_title">თანხა</p>
-              <p class="amount">258.00 ₾</p>
+              <p>
+                <span class="amount">258</span>
+                <span class="amount_currency_symbol">₾</span>
+              </p>
             </div>
-            <div class="iban_wrapper">
-              <p class="iban_title">ანგარიში:</p>
-              <p class="iban">*********0479</p>
+            <div class="pan_wrapper">
+              <p class="pan_title">ანგარიში:</p>
+              <p class="pan">1259 9878 3548 9878</p>
             </div>
           </div>
         </div>
@@ -55,12 +57,12 @@
         <form class="card_info_form" onsubmit="showSecStep(event)">
           <h3>ბარათის მონაცემები</h3>
           <div class="card_info_input_wrapper">
-            <label for="iban" class="card_info_label">ბარათის ნომერი</label>
+            <label for="pan" class="card_info_label">ბარათის ნომერი</label>
             <input
-              class="card_info_input iban"
+              class="card_info_input pan"
               type="text"
-              name="iban"
-              id="iban"
+              name="pan"
+              id="pan"
             />
           </div>
           <div class="card_info_date_cvv_wrapper">
@@ -86,7 +88,7 @@
             </div>
           </div>
           <button type="submit" class="form_btn">
-            გადახდა <span>( 258.00₾ )</span>
+            გადახდა ( <span class="btn_amount">258</span>₾ )
           </button>
         </form>
         <!-- form on the second step  -->
@@ -125,40 +127,47 @@
             <p class="success_title">გადახდა წარმატებით შესრულდა</p>
           </div>
           <div class="transaction_info_wrapper">
-            <div>
+            <div class="transaction_info">
               <h3>დეტალები</h3>
-              <ul class="transaction_details">
-                <li>
+              <ul>
+                <li class="transaction_info_list_item">
                   <span>პროვაიდერის დასახელება:</span
                   ><span>JSC Credo bank</span>
                 </li>
-                <li>
+                <li class="transaction_info_list_item">
                   <span>თარიღი:</span>
                   <span>18/06/2024 22:23:00</span>
                 </li>
-                <li>
+                <li class="transaction_info_list_item">
                   <span>დასტურის კოდი:</span>
                   <span>197846</span>
                 </li>
               </ul>
             </div>
 
-            <div>
+            <div class="transaction_info">
               <h3>საიდან</h3>
-              <ul class="transaction_from">
-                <li><span>ანგარიში:</span><span>6***********0479</span></li>
+              <ul>
+                <li class="transaction_info_list_item">
+                  <span>ანგარიში:</span><span>6***********0479</span>
+                </li>
               </ul>
             </div>
 
-            <div>
+            <div class="transaction_info">
               <h3>სად</h3>
-              <ul class="transaction_to">
-                <li><span>მერჩანტი:</span><span>www.extra.ge</span></li>
-                <li><span>მისამართი:</span><span>საქართველო,თბილისი</span></li>
+              <ul>
+                <li class="transaction_info_list_item">
+                  <span>მერჩანტი:</span><span>www.extra.ge</span>
+                </li>
+                <li class="transaction_info_list_item">
+                  <span>მისამართი:</span><span>საქართველო,თბილისი</span>
+                </li>
               </ul>
             </div>
-            <div class="transaction_amount">
-              <span>თანხა:</span><span>20.00 ₾</span>
+            <div class="transaction_info_list_item">
+              <span>თანხა:</span
+              ><span class="transaction_info_list_item_amount">20.00 ₾</span>
             </div>
           </div>
           <div class="success_btns_wrapper">

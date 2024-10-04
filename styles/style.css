@@ -34,18 +34,6 @@ header {
   position: relative;
 }
 
-.more_info_wrapper {
-  display: flex;
-  column-gap: 8px;
-  align-items: center;
-}
-
-.more_info_txt {
-  font-family: var(--font-regular);
-  font-size: 16px;
-  line-height: 16px;
-}
-
 .close_icon {
   position: absolute;
   top: 15px;
@@ -64,59 +52,82 @@ header {
   column-gap: 16px;
   align-items: flex-start;
 }
+
+.merchant_img_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 63px;
+  height: 63px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: var(--border);
+}
+
+.merchant_img {
+  width: 43px;
+  height: 43px;
+}
+
 .merchant_info_wrapper {
   display: flex;
   flex-direction: column;
   row-gap: 8px;
 }
-.merchant_name {
-  font-family: var(--font-bold);
-  font-size: 24px;
-  line-height: 24px;
-}
 
 .merchant_name {
+  text-transform: lowercase;
+  color: var(--txt-color);
   font-family: var(--font-bold);
   font-size: 24px;
   line-height: 24px;
+  width: 146px;
 }
 
 .merchant_payment_status,
 .merchant_location {
   font-family: var(--font-light);
   font-size: 16px;
-  color: rgba(26, 29, 31, 0.7);
+  color: var(--txt-color-light);
 }
 
-.amount_iban_container {
+.merchant_location_city {
+  text-transform: capitalize;
+}
+
+.amount_pan_container {
   display: flex;
   flex-direction: column;
   row-gap: 16px;
 }
 .amount_wrapper,
-.iban_wrapper {
+.pan_wrapper {
   display: flex;
   flex-direction: column;
   row-gap: 16px;
 }
-.iban_wrapper {
+.pan_wrapper {
   display: none;
 }
 .amount_title,
-.iban_title {
+.pan_title {
   font-family: var(--font-regular);
   font-size: 14px;
-  color: rgba(26, 29, 31, 0.7);
+  color: var(--txt-color-light);
 }
 
 .amount,
-.iban {
+.pan,
+.amount_currency_symbol {
   font-family: var(--font-regular);
-  color: rgba(26, 29, 31, 1);
+  color: var(--txt-color);
   font-size: 24px;
   line-height: 20px;
 }
-.iban {
+.amount_currency_symbol {
+  padding-left: 2px;
+}
+.pan {
   font-size: 16px;
   line-height: 24px;
 }
@@ -130,7 +141,7 @@ header {
 }
 
 .card_info_form > h3 {
-  font-family: var(--font-light);
+  font-family: var(--font-light-caps);
   font-size: 16px;
   line-height: 28px;
 }
@@ -148,6 +159,8 @@ header {
   border: none;
   background-color: transparent;
   outline: none;
+  color: var(--txt-color);
+  font-family: var(--font-light);
 }
 
 .card_info_input.invalid {
@@ -159,7 +172,7 @@ header {
   font-size: 12px;
   line-height: 16px;
   padding-bottom: 3px;
-  color: rgba(25, 29, 31, 0.32);
+  color: var(--txt-color-ultra-light);
 }
 
 .card_info_date_cvv_wrapper {
@@ -177,12 +190,13 @@ header {
 .cancel_btn,
 .receipt_btn {
   width: 100%;
+  letter-spacing: 0.5px;
   background-color: var(--btn-background);
   border: none;
   padding-block: 20px;
   font-size: 14px;
   color: #fff;
-  font-family: var(--font-bold);
+  font-family: var(--font-bold-caps);
   border-radius: 4px;
   transition: all 0.3s ease-in-out;
 }
@@ -275,20 +289,16 @@ footer {
 
 .cancel_btn {
   background-color: transparent;
-  font-family: var(--font-light);
+  font-family: var(--font);
   color: var(--btn-background);
   margin-top: 8px;
-}
-
-.cancel_btn:hover {
-  background-color: var(--sec-btn-background);
 }
 
 /* third step */
 
 .success_card_container {
   display: none;
-  padding: 40px 82px 16px 82px;
+  padding: 16px 82px;
   flex-direction: column;
   row-gap: 40px;
 }
@@ -308,4 +318,46 @@ footer {
   margin-top: 16px;
   background-color: var(--sec-btn-background);
   color: var(--sec-btn-color);
+}
+
+.transaction_info_wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.transaction_info > h3 {
+  font-family: var(--font-bold);
+  font-size: 16px;
+  line-height: 24px;
+  padding-bottom: 8px;
+}
+
+.transaction_info > ul {
+  font-size: 16px;
+  line-height: 24px;
+
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.transaction_info_list_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.transaction_info_list_item > span:first-child {
+  font-family: var(--font-light);
+  color: rgba(26, 29, 31, 0.7);
+}
+
+.transaction_info_list_item > span:nth-child(2) {
+  font-family: var(--font-bold);
+  color: rgba(26, 29, 31, 1);
+}
+
+.transaction_info_list_item_amount {
+  font-size: 24px;
 }

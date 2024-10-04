@@ -1,31 +1,48 @@
 @font-face {
-  font-family: "HelveticaNeueLTGeoLight";
-  src: url("./fonts/HELVETICA\ NEUE\ LT\ GEO\ 55\ ROMAN.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
+  font-family: HelveticaBold;
+  src: url("./fonts/bold.otf");
+}
+
+@font-face {
+  font-family: HelveticaBoldCaps;
+  src: url("./fonts/bold_caps.otf");
+}
+
+@font-face {
+  font-family: HelveticaMedium;
+  src: url("./fonts/medium.otf");
+}
+
+@font-face {
+  font-family: HelveticaMediumCaps;
+  src: url("./fonts/medium_caps.otf");
+}
+
+@font-face {
+  font-family: HelveticaRoman;
+  src: url("./fonts/roman.otf");
 }
 @font-face {
-  font-family: "HelveticaNeueLTGeoMedium";
-  src: url("./fonts/HELVETICA\ NEUE\ LT\ GEO\ 65\ MEDIUM.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "HelveticaNeueLTGeoBold";
-  src: url("./fonts/HELVETICA\ NEUE\ LT\ GEO\ 75\ BOLD.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
+  font-family: HelveticaRomanCaps;
+  src: url("./fonts/roman_caps.otf");
 }
 
 :root {
-  --font-light: "HelveticaNeueLTGeoLight", sans-serif;
-  --font-regular: "HelveticaNeueLTGeoMedium", sans-serif;
-  --font-bold: "HelveticaNeueLTGeoBold", sans-serif;
+  --font-light-caps: "HelveticaRomanCaps", sans-serif;
+  --font-light: "HelveticaRoman", sans-serif;
+  --font-regular-caps: "HelveticaMediumCaps", sans-serif;
+  --font-regular: "HelveticaMedium", sans-serif;
+  --font-bold-caps: "HelveticaBoldCaps", sans-serif;
+  --font-bold: "HelveticaBold", sans-serif;
+
   --btn-background: #ea4c38;
   --btn-background-hover: #d53d2a;
   --sec-btn-background: #ebf3f7;
   --sec-btn-color: #056596;
   --border-color-invalid: #e62933;
+  --txt-color: rgba(26, 29, 31, 1);
+  --txt-color-light: rgba(26, 29, 31, 0.7);
+  --txt-color-ultra-light: rgba(25, 29, 31, 0.32);
   --filter: invert(40%) sepia(33%) saturate(5325%) hue-rotate(341deg)
     brightness(96%) contrast(90%);
   --border: 1px solid rgba(26, 29, 31, 0.08);

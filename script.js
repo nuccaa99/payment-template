@@ -1,16 +1,28 @@
+// price amount format with 2 zeros
+const amountElement = document.querySelector(".amount");
+amountElement.textContent = parseFloat(amountElement.textContent).toFixed(2);
+const btnAmountElement = document.querySelector(".btn_amount");
+btnAmountElement.textContent = parseFloat(btnAmountElement.textContent).toFixed(
+  2
+);
+
+// mask primary account number aka pan
+const panElement = document.querySelector(".pan");
+const maskedPan =
+  "*".repeat(12) + panElement.textContent.replace(/\s+/g, "").slice(12);
+panElement.textContent = maskedPan;
+
 // variables to change on second step
-const moreInfoSection = document.querySelector(".more_info_wrapper");
-const ibanWrapper = document.querySelector(".iban_wrapper");
+const panWrapper = document.querySelector(".pan_wrapper");
 const merchantLocation = document.querySelector(".merchant_location");
 const cardInfoForm = document.querySelector(".card_info_form");
 const codeForm = document.querySelector(".code_form");
 
 const showSecStep = (e) => {
   e.preventDefault();
-  // hide more info section in the header on second step
-  moreInfoSection.style.display = "none";
-  // display iban on second step
-  ibanWrapper.style.display = "flex";
+
+  // display pan on second step
+  panWrapper.style.display = "flex";
   // hide merchant location on second step
   merchantLocation.style.display = "none";
   // hide card info form on second step
