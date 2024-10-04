@@ -6,6 +6,27 @@ btnAmountElement.textContent = parseFloat(btnAmountElement.textContent).toFixed(
   2
 );
 
+// pan input format and visa/mc icon
+
+const visaIcon = document.getElementById("pan-icon-visa");
+const mcIcon = document.getElementById("pan-icon-mc");
+
+function handleFormatting(e) {
+  let value = e.target.value.replace(/\s+/g, "");
+  let formattedValue = value.replace(/(\d{4})(?=\d)/g, "$1 ");
+  e.target.value = formattedValue;
+  if (e.target.value[0] === "4") {
+    visaIcon.classList.remove("hidden");
+    mcIcon.classList.add("hidden");
+  } else if (e.target.value[0] === "5") {
+    mcIcon.classList.remove("hidden");
+    visaIcon.classList.add("hidden");
+  } else {
+    mcIcon.classList.add("hidden");
+    visaIcon.classList.add("hidden");
+  }
+}
+
 // mask primary account number aka pan
 const panElement = document.querySelector(".pan");
 const maskedPan =
@@ -20,7 +41,6 @@ const codeForm = document.querySelector(".code_form");
 
 const showSecStep = (e) => {
   e.preventDefault();
-
   // display pan on second step
   panWrapper.style.display = "flex";
   // hide merchant location on second step

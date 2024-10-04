@@ -4,6 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/reset.css" />
     <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/laptop.css" />
+    <link rel="stylesheet" href="./styles/tablet.css" />
+    <link rel="stylesheet" href="./styles/mobile.css" />
     <title>Payment Template</title>
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.svg" />
   </head>
@@ -59,10 +62,26 @@
           <div class="card_info_input_wrapper">
             <label for="pan" class="card_info_label">ბარათის ნომერი</label>
             <input
+              oninput="handleFormatting(event)"
+              minlength="19"
+              maxlength="19"
               class="card_info_input pan"
               type="text"
               name="pan"
               id="pan"
+              autocomplete="off"
+            />
+            <img
+              src="./assets/images/visa_small_icon.svg"
+              alt="visa icon"
+              id="pan-icon-visa"
+              class="pan_icon hidden"
+            />
+            <img
+              src="./assets/images/mc_small_icon.svg"
+              alt="mc icon"
+              id="pan-icon-mc"
+              class="pan_icon hidden"
             />
           </div>
           <div class="card_info_date_cvv_wrapper">
@@ -87,7 +106,7 @@
               />
             </div>
           </div>
-          <button type="submit" class="form_btn">
+          <button type="submit" class="form_btn invalid">
             გადახდა ( <span class="btn_amount">258</span>₾ )
           </button>
         </form>
