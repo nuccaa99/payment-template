@@ -6,13 +6,13 @@ btnAmountElement.textContent = parseFloat(btnAmountElement.textContent).toFixed(
   2
 );
 
-// pan input format and visa/mc icon
+// card number (pan) input format and visa/mc icon
 
 const visaIcon = document.getElementById('pan-icon-visa');
 const mcIcon = document.getElementById('pan-icon-mc');
 const CARD_TYPES = { VISA: '4', MASTERCARD: '5' };
 
-function handleFormatting(e) {
+function handlePanFormatting(e) {
   const input = e.target;
   input.value = input.value
     .replace(/\D/g, '')
@@ -23,7 +23,20 @@ function handleFormatting(e) {
   mcIcon.classList.toggle('hidden', firstDigit !== CARD_TYPES.MASTERCARD);
 }
 
-// mask primary account number aka pan
+// card expiry date input format
+
+function handleCardExpiryFormatting(e) {
+  const input = e.target;
+  let value = input.value.replace(/\D/g, '');
+  value = value.slice(0, 6);
+
+  if (value.length > 2) {
+    value = value.slice(0, 2) + ' / ' + value.slice(2);
+  }
+  input.value = value;
+}
+
+// mask primary account number aka pan on the second step
 const panElement = document.querySelector('.pan');
 const maskedPan =
   '*'.repeat(12) + panElement.textContent.replace(/\s+/g, '').slice(12);
