@@ -10,21 +10,17 @@ btnAmountElement.textContent = parseFloat(btnAmountElement.textContent).toFixed(
 
 const visaIcon = document.getElementById('pan-icon-visa');
 const mcIcon = document.getElementById('pan-icon-mc');
+const CARD_TYPES = { VISA: '4', MASTERCARD: '5' };
 
 function handleFormatting(e) {
-  let value = e.target.value.replace(/\s+/g, '');
-  let formattedValue = value.replace(/(\d{4})(?=\d)/g, '$1 ');
-  e.target.value = formattedValue;
-  if (e.target.value[0] === '4') {
-    visaIcon.classList.remove('hidden');
-    mcIcon.classList.add('hidden');
-  } else if (e.target.value[0] === '5') {
-    mcIcon.classList.remove('hidden');
-    visaIcon.classList.add('hidden');
-  } else {
-    mcIcon.classList.add('hidden');
-    visaIcon.classList.add('hidden');
-  }
+  const input = e.target;
+  input.value = input.value
+    .replace(/\D/g, '')
+    .replace(/(\d{4})(?=\d)/g, '$1 ')
+    .trim();
+  const firstDigit = input.value[0];
+  visaIcon.classList.toggle('hidden', firstDigit !== CARD_TYPES.VISA);
+  mcIcon.classList.toggle('hidden', firstDigit !== CARD_TYPES.MASTERCARD);
 }
 
 // mask primary account number aka pan
