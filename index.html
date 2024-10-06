@@ -23,178 +23,179 @@
             class="close_icon"
           />
         </header>
-        <!-- merchant and amount first step -->
-        <div class="merchant_amount_container">
-          <div class="merchant_wrapper">
-            <div class="merchant_img_wrapper">
+        <div class="scrollable_content">
+          <!-- merchant and amount first step -->
+          <div class="merchant_amount_container">
+            <div class="merchant_wrapper">
+              <div class="merchant_img_wrapper">
+                <img
+                  class="merchant_img"
+                  src="https://via.placeholder.com/43"
+                  alt="merchant icon"
+                />
+              </div>
+              <div class="merchant_info_wrapper">
+                <h3 class="merchant_name">Merchant</h3>
+                <p class="merchant_payment_status">Payment processing</p>
+                <p class="merchant_location">
+                  <span class="merchant_location_country_code">CC,</span>
+                  <span class="merchant_location_city">city</span>
+                </p>
+              </div>
+            </div>
+            <div class="amount_pan_container">
+              <div class="amount_wrapper">
+                <p class="amount_title">თანხა</p>
+                <p>
+                  <span class="amount">258</span>
+                  <span class="amount_currency_symbol">₾</span>
+                </p>
+              </div>
+              <div class="pan_wrapper">
+                <p class="pan_title">ანგარიში:</p>
+                <p class="pan">1259 9878 3548 9878</p>
+              </div>
+            </div>
+          </div>
+          <!-- form on the first step  -->
+          <form class="card_info_form" onsubmit="showSecStep(event)">
+            <h3>ბარათის მონაცემები</h3>
+            <div class="card_info_input_wrapper">
+              <label for="pan" class="card_info_label">ბარათის ნომერი</label>
+              <input
+                oninput="handleFormatting(event)"
+                minlength="19"
+                maxlength="19"
+                class="card_info_input pan"
+                type="text"
+                name="pan"
+                id="pan"
+                autocomplete="off"
+              />
               <img
-                class="merchant_img"
-                src="https://via.placeholder.com/43"
-                alt="merchant icon"
+                src="./assets/images/visa_small_icon.svg"
+                alt="visa icon"
+                id="pan-icon-visa"
+                class="pan_icon hidden"
+              />
+              <img
+                src="./assets/images/mc_small_icon.svg"
+                alt="mc icon"
+                id="pan-icon-mc"
+                class="pan_icon hidden"
               />
             </div>
-            <div class="merchant_info_wrapper">
-              <h3 class="merchant_name">Merchant</h3>
-              <p class="merchant_payment_status">Payment processing</p>
-              <p class="merchant_location">
-                <span class="merchant_location_country_code">CC,</span>
-                <span class="merchant_location_city">city</span>
-              </p>
+            <div class="card_info_date_cvv_wrapper">
+              <div class="card_info_input_wrapper date_cvv">
+                <label for="cardDate" class="card_info_label"
+                  >მოქმედების ვადა</label
+                >
+                <input
+                  class="card_info_input card_date"
+                  type="text"
+                  name="cardDate"
+                  id="cardDate"
+                />
+              </div>
+              <div class="card_info_input_wrapper date_cvv">
+                <label for="cardCvv" class="card_info_label">CVC/CVV</label>
+                <input
+                  class="card_info_input card_cvv"
+                  type="text"
+                  name="cardCvv"
+                  id="cardCvv"
+                />
+              </div>
             </div>
-          </div>
-          <div class="amount_pan_container">
-            <div class="amount_wrapper">
-              <p class="amount_title">თანხა</p>
-              <p>
-                <span class="amount">258</span>
-                <span class="amount_currency_symbol">₾</span>
-              </p>
+            <button type="submit" class="form_btn invalid">
+              გადახდა ( <span class="btn_amount">258</span>₾ )
+            </button>
+          </form>
+          <!-- form on the second step  -->
+          <form class="code_form" onsubmit="showThirdStep(event)">
+            <label for="code" class="code_form_label"
+              >შეიყვანეთ ერთჯერადი კოდი
+              <input
+                class="code_form_input"
+                type="text"
+                name="code"
+                id="code"
+                placeholder="ერთჯერადი კოდი"
+              />
+            </label>
+            <div class="refresh_wrapper">
+              <img
+                src="./assets/images/refresh.svg"
+                alt="refresh icon"
+                class="refresh_icon"
+              />
+              <span>მიიღე ახალი კოდი</span>
             </div>
-            <div class="pan_wrapper">
-              <p class="pan_title">ანგარიში:</p>
-              <p class="pan">1259 9878 3548 9878</p>
+            <button type="submit" class="form_btn">დადასტურება</button>
+            <button type="submit" class="cancel_btn">გაუქმება</button>
+          </form>
+
+          <!-- section on third step -->
+
+          <div class="success_card_container">
+            <div class="success_icon_wrapper">
+              <img
+                src="./assets/images/success.svg"
+                alt="success icon"
+                class="success_icon"
+              />
+              <p class="success_title">გადახდა წარმატებით შესრულდა</p>
+            </div>
+            <div class="transaction_info_wrapper">
+              <div class="transaction_info">
+                <h3>დეტალები</h3>
+                <ul>
+                  <li class="transaction_info_list_item">
+                    <span>პროვაიდერის დასახელება:</span
+                    ><span>JSC Credo bank</span>
+                  </li>
+                  <li class="transaction_info_list_item">
+                    <span>თარიღი:</span>
+                    <span>18/06/2024 22:23:00</span>
+                  </li>
+                  <li class="transaction_info_list_item">
+                    <span>დასტურის კოდი:</span>
+                    <span>197846</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="transaction_info">
+                <h3>საიდან</h3>
+                <ul>
+                  <li class="transaction_info_list_item">
+                    <span>ანგარიში:</span><span>6***********0479</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="transaction_info">
+                <h3>სად</h3>
+                <ul>
+                  <li class="transaction_info_list_item">
+                    <span>მერჩანტი:</span><span>www.extra.ge</span>
+                  </li>
+                  <li class="transaction_info_list_item">
+                    <span>მისამართი:</span><span>საქართველო,თბილისი</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="transaction_info_list_item">
+                <span>თანხა:</span
+                ><span class="transaction_info_list_item_amount">20.00 ₾</span>
+              </div>
+            </div>
+            <div class="success_btns_wrapper">
+              <button type="submit" class="form_btn">დახურვა</button>
+              <button type="submit" class="receipt_btn">ქვითრის ბეჭდვა</button>
             </div>
           </div>
         </div>
-        <!-- form on the first step  -->
-        <form class="card_info_form" onsubmit="showSecStep(event)">
-          <h3>ბარათის მონაცემები</h3>
-          <div class="card_info_input_wrapper">
-            <label for="pan" class="card_info_label">ბარათის ნომერი</label>
-            <input
-              oninput="handleFormatting(event)"
-              minlength="19"
-              maxlength="19"
-              class="card_info_input pan"
-              type="text"
-              name="pan"
-              id="pan"
-              autocomplete="off"
-            />
-            <img
-              src="./assets/images/visa_small_icon.svg"
-              alt="visa icon"
-              id="pan-icon-visa"
-              class="pan_icon hidden"
-            />
-            <img
-              src="./assets/images/mc_small_icon.svg"
-              alt="mc icon"
-              id="pan-icon-mc"
-              class="pan_icon hidden"
-            />
-          </div>
-          <div class="card_info_date_cvv_wrapper">
-            <div class="card_info_input_wrapper date_cvv">
-              <label for="cardDate" class="card_info_label"
-                >მოქმედების ვადა</label
-              >
-              <input
-                class="card_info_input card_date"
-                type="text"
-                name="cardDate"
-                id="cardDate"
-              />
-            </div>
-            <div class="card_info_input_wrapper date_cvv">
-              <label for="cardCvv" class="card_info_label">CVC/CVV</label>
-              <input
-                class="card_info_input card_cvv"
-                type="text"
-                name="cardCvv"
-                id="cardCvv"
-              />
-            </div>
-          </div>
-          <button type="submit" class="form_btn invalid">
-            გადახდა ( <span class="btn_amount">258</span>₾ )
-          </button>
-        </form>
-        <!-- form on the second step  -->
-        <form class="code_form" onsubmit="showThirdStep(event)">
-          <label for="code" class="code_form_label"
-            >შეიყვანეთ ერთჯერადი კოდი
-            <input
-              class="code_form_input"
-              type="text"
-              name="code"
-              id="code"
-              placeholder="ერთჯერადი კოდი"
-            />
-          </label>
-          <div class="refresh_wrapper">
-            <img
-              src="./assets/images/refresh.svg"
-              alt="refresh icon"
-              class="refresh_icon"
-            />
-            <span>მიიღე ახალი კოდი</span>
-          </div>
-          <button type="submit" class="form_btn">დადასტურება</button>
-          <button type="submit" class="cancel_btn">გაუქმება</button>
-        </form>
-
-        <!-- section on third step -->
-
-        <div class="success_card_container">
-          <div class="success_icon_wrapper">
-            <img
-              src="./assets/images/success.svg"
-              alt="success icon"
-              class="success_icon"
-            />
-            <p class="success_title">გადახდა წარმატებით შესრულდა</p>
-          </div>
-          <div class="transaction_info_wrapper">
-            <div class="transaction_info">
-              <h3>დეტალები</h3>
-              <ul>
-                <li class="transaction_info_list_item">
-                  <span>პროვაიდერის დასახელება:</span
-                  ><span>JSC Credo bank</span>
-                </li>
-                <li class="transaction_info_list_item">
-                  <span>თარიღი:</span>
-                  <span>18/06/2024 22:23:00</span>
-                </li>
-                <li class="transaction_info_list_item">
-                  <span>დასტურის კოდი:</span>
-                  <span>197846</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="transaction_info">
-              <h3>საიდან</h3>
-              <ul>
-                <li class="transaction_info_list_item">
-                  <span>ანგარიში:</span><span>6***********0479</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="transaction_info">
-              <h3>სად</h3>
-              <ul>
-                <li class="transaction_info_list_item">
-                  <span>მერჩანტი:</span><span>www.extra.ge</span>
-                </li>
-                <li class="transaction_info_list_item">
-                  <span>მისამართი:</span><span>საქართველო,თბილისი</span>
-                </li>
-              </ul>
-            </div>
-            <div class="transaction_info_list_item">
-              <span>თანხა:</span
-              ><span class="transaction_info_list_item_amount">20.00 ₾</span>
-            </div>
-          </div>
-          <div class="success_btns_wrapper">
-            <button type="submit" class="form_btn">დახურვა</button>
-            <button type="submit" class="receipt_btn">ქვითრის ბეჭდვა</button>
-          </div>
-        </div>
-
         <footer>
           <div class="footer_img_wrapper">
             <img src="./assets/images/pci_icon.svg" alt="pci icon" />
