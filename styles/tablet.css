@@ -1,0 +1,62 @@
+@media (max-width: 600px) {
+  .modal_contents_container {
+    width: 375px;
+  }
+  /* header */
+  .model_header_logo {
+    width: 150px;
+  }
+
+  .close_icon {
+    padding: 12px;
+    background-color: rgba(26, 29, 31, 0.04);
+    border-radius: 14px;
+    top: 32px;
+  }
+
+  header {
+    padding: 42px 24px 34.35px 24px;
+  }
+
+  .scrollable_content {
+    padding-block: 32px 123.68px;
+    row-gap: 47px;
+  }
+
+  .merchant_amount_container,
+  .card_info_form {
+    padding: 0px 24px;
+  }
+
+  .merchant_img_wrapper {
+    width: 44px;
+    height: 44px;
+  }
+
+  .merchant_img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .merchant_name {
+    font-size: 16px;
+  }
+
+  .merchant_payment_status,
+  .merchant_location {
+    font-size: 14px;
+  }
+  .card_info_form > h3 {
+    font-size: 14px;
+  }
+
+  .card_info_input_wrapper.date_cvv {
+    margin-top: 8px;
+    width: 47.5%;
+  }
+
+  footer {
+    padding: 24px 24px 46px 24px;
+  }
+
+}

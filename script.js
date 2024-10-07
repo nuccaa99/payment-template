@@ -68,24 +68,60 @@ function handlePanFormatting(e) {
   } else {
     input.parentElement.classList.remove("validation_error");
   }
-
-  if (isValid && input.value.length >= 16) {
+  console.log(input.value.length);
+  if (isValid && input.value.length === 19) {
     document.getElementById("cardDate").focus();
   }
 }
 
 // card expiry date input format
 
+function validateCardExpiry(expiryDate) {
+  const [month, year] = expiryDate.split("/").map((item) => item.trim());
+
+  if (!month || !year || month.length !== 2 || year.length !== 2) {
+    return { isValid: false };
+  }
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear() % 100;
+  const currentMonth = currentDate.getMonth() + 1;
+
+  const expMonth = parseInt(month, 10);
+  const expYear = parseInt(year, 10);
+
+  if (expMonth < 1 || expMonth > 12) {
+    return { isValid: false };
+  }
+
+  if (
+    expYear < currentYear ||
+    (expYear === currentYear && expMonth < currentMonth)
+  ) {
+    return { isValid: false };
+  }
+
+  return { isValid: true };
+}
+
 function handleCardExpiryFormatting(e) {
   const input = e.target;
   let value = input.value.replace(/\D/g, "");
   value = value.slice(0, 6);
-
   if (value.length > 2) {
     value = value.slice(0, 2) + " / " + value.slice(2);
   }
   input.value = value;
   const { isValid } = validateCardExpiry(input.value);
+
+  if (input.value.length > 0) {
+    if (isValid) {
+      input.parentElement.classList.remove("validation_error");
+    } else {
+      input.parentElement.classList.add("validation_error");
+    }
+  } else {
+    input.parentElement.classList.remove("validation_error");
+  }
 
   if (input.value.length === 7) {
     document.getElementById("cardCvv").focus();
