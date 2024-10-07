@@ -1,75 +1,131 @@
 // price amount format with 2 zeros
-const amountElement = document.querySelector('.amount');
+const amountElement = document.querySelector(".amount");
 amountElement.textContent = parseFloat(amountElement.textContent).toFixed(2);
-const btnAmountElement = document.querySelector('.btn_amount');
+const btnAmountElement = document.querySelector(".btn_amount");
 btnAmountElement.textContent = parseFloat(btnAmountElement.textContent).toFixed(
   2
 );
 
-// card number (pan) input format and visa/mc icon
+//validate card number
 
-const visaIcon = document.getElementById('pan-icon-visa');
-const mcIcon = document.getElementById('pan-icon-mc');
-const CARD_TYPES = { VISA: '4', MASTERCARD: '5' };
+function validateCreditCard(cardNumber) {
+  if (cardNumber.length < 13 || cardNumber.length > 19) {
+    return { isValid: false, cardType: null };
+  }
+  //Luhn algorithm
+  let sum = 0;
+  let isEven = false;
+  for (let i = cardNumber.length - 1; i >= 0; i--) {
+    let digit = parseInt(cardNumber.charAt(i), 10);
+
+    if (isEven) {
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9;
+      }
+    }
+    sum += digit;
+    isEven = !isEven;
+  }
+  const isValid = sum % 10 === 0;
+  // Determine card type
+  let cardType = null;
+  if (isValid) {
+    if (/^4/.test(cardNumber)) {
+      cardType = "Visa";
+    } else if (/^5[1-5]/.test(cardNumber)) {
+      cardType = "MasterCard";
+    }
+  }
+  return { isValid, cardType };
+}
+
+// card number (pan) input format and visa/mc icon
+const visaIcon = document.getElementById("pan-icon-visa");
+const mcIcon = document.getElementById("pan-icon-mc");
 
 function handlePanFormatting(e) {
   const input = e.target;
+
   input.value = input.value
-    .replace(/\D/g, '')
-    .replace(/(\d{4})(?=\d)/g, '$1 ')
+    .replace(/\D/g, "")
+    .replace(/(\d{4})(?=\d)/g, "$1 ")
     .trim();
-  const firstDigit = input.value[0];
-  visaIcon.classList.toggle('hidden', firstDigit !== CARD_TYPES.VISA);
-  mcIcon.classList.toggle('hidden', firstDigit !== CARD_TYPES.MASTERCARD);
+
+  const { isValid, cardType } = validateCreditCard(
+    input.value.replace(/\s/g, "")
+  );
+
+  visaIcon.classList.toggle("hidden", cardType !== "Visa");
+  mcIcon.classList.toggle("hidden", cardType !== "MasterCard");
+
+  if (input.value.length > 0) {
+    if (isValid) {
+      input.parentElement.classList.remove("validation_error");
+    } else {
+      input.parentElement.classList.add("validation_error");
+    }
+  } else {
+    input.parentElement.classList.remove("validation_error");
+  }
+
+  if (isValid && input.value.length >= 16) {
+    document.getElementById("cardDate").focus();
+  }
 }
 
 // card expiry date input format
 
 function handleCardExpiryFormatting(e) {
   const input = e.target;
-  let value = input.value.replace(/\D/g, '');
+  let value = input.value.replace(/\D/g, "");
   value = value.slice(0, 6);
 
   if (value.length > 2) {
-    value = value.slice(0, 2) + ' / ' + value.slice(2);
+    value = value.slice(0, 2) + " / " + value.slice(2);
   }
   input.value = value;
+  const { isValid } = validateCardExpiry(input.value);
+
+  if (input.value.length === 7) {
+    document.getElementById("cardCvv").focus();
+  }
 }
 
 // mask primary account number aka pan on the second step
-const panElement = document.querySelector('.pan');
+const panElement = document.querySelector(".pan");
 const maskedPan =
-  '*'.repeat(12) + panElement.textContent.replace(/\s+/g, '').slice(12);
+  "*".repeat(12) + panElement.textContent.replace(/\s+/g, "").slice(12);
 panElement.textContent = maskedPan;
 
 // variables to change on second step
-const panWrapper = document.querySelector('.pan_wrapper');
-const merchantLocation = document.querySelector('.merchant_location');
-const cardInfoForm = document.querySelector('.card_info_form');
-const codeForm = document.querySelector('.code_form');
+const panWrapper = document.querySelector(".pan_wrapper");
+const merchantLocation = document.querySelector(".merchant_location");
+const cardInfoForm = document.querySelector(".card_info_form");
+const codeForm = document.querySelector(".code_form");
 
 const showSecStep = (e) => {
   e.preventDefault();
   // display pan on second step
-  panWrapper.style.display = 'flex';
+  panWrapper.style.display = "flex";
   // hide merchant location on second step
-  merchantLocation.style.display = 'none';
+  merchantLocation.style.display = "none";
   // hide card info form on second step
-  cardInfoForm.style.display = 'none';
+  cardInfoForm.style.display = "none";
   // display code form on second step
-  codeForm.style.display = 'flex';
+  codeForm.style.display = "flex";
 };
 
 // variables to change on third step
 
 const merchantAndAmountContainer = document.querySelector(
-  '.merchant_amount_container'
+  ".merchant_amount_container"
 );
-const successCardContainer = document.querySelector('.success_card_container');
+const successCardContainer = document.querySelector(".success_card_container");
 
 const showThirdStep = (e) => {
   e.preventDefault();
-  merchantAndAmountContainer.style.display = 'none';
-  codeForm.style.display = 'none';
-  successCardContainer.style.display = 'flex';
+  merchantAndAmountContainer.style.display = "none";
+  codeForm.style.display = "none";
+  successCardContainer.style.display = "flex";
 };

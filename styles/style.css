@@ -8,6 +8,10 @@ button.invalid {
   opacity: 0.45;
 }
 
+.card_info_input_wrapper.validation_error {
+  border: 1px solid var(--border-color-invalid);
+}
+
 /* modal */
 .modal {
   top: 0;
@@ -189,7 +193,7 @@ header {
   padding: 11px 16px 13px 16px;
   background-color: rgba(25, 29, 31, 0.04);
   border-radius: 6px;
-
+  border: 1px solid transparent;
   position: relative;
 }
 
