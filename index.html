@@ -99,10 +99,12 @@
                   autocomplete="off"
                 />
               </div>
-              <div class="card_info_input_wrapper date_cvv">
+              <div class="card_info_input_wrapper date_cvv" id="cvvWrapper">
                 <label for="cardCvv" class="card_info_label">CVC/CVV</label>
                 <input
                   class="card_info_input card_cvv"
+                  maxlength="3"
+                  oninput="handleCvv(event)"
                   type="text"
                   name="cardCvv"
                   id="cardCvv"

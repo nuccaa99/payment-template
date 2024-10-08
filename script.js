@@ -123,6 +123,25 @@ expDateInput.addEventListener("blur", function () {
   }
 });
 
+// CVC/CVV input format
+
+function handleCvv(e) {
+  let input = e.target.value.replace(/\D/g, "");
+  e.target.value = input.slice(0, 3);
+}
+
+const cvvInput = document.getElementById("cardCvv");
+const cvvInputWrapper = document.getElementById("cvvWrapper");
+
+cvvInput.addEventListener("blur", function () {
+  const cvv = cvvInput.value;
+  if (cvv.length !== 3) {
+    cvvInputWrapper.classList.add("validation_error");
+  } else {
+    cvvInputWrapper.classList.remove("validation_error");
+  }
+});
+
 // mask primary account number aka pan on the second step
 const panElement = document.querySelector(".pan");
 const maskedPan =
