@@ -28,11 +28,10 @@ function getCardType(cardNumber) {
 
 // card number validity based on luhn algorithm
 function isValidCardNumber(cardNumber) {
-  const sanitizedCardNumber = cardNumber.replace(/\D/g, "");
   let sum = 0;
   let shouldDouble = false;
-  for (let i = sanitizedCardNumber.length - 1; i >= 0; i--) {
-    let digit = parseInt(sanitizedCardNumber[i]);
+  for (let i = cardNumber.length - 1; i >= 0; i--) {
+    let digit = parseInt(cardNumber[i]);
     if (shouldDouble) {
       digit *= 2;
       if (digit > 9) digit -= 9;
@@ -41,8 +40,7 @@ function isValidCardNumber(cardNumber) {
     sum += digit;
     shouldDouble = !shouldDouble;
   }
-
-  return sum % 10 === 0;
+  return sum % 10 === 0 && cardNumber.length === 16;
 }
 
 // card number (pan) input format and visa/mc icon
@@ -59,6 +57,8 @@ function handleCardNumber(e) {
 
   visaIcon.classList.toggle("hidden", cardType !== "Visa");
   mcIcon.classList.toggle("hidden", cardType !== "MasterCard");
+
+  updateButtonState();
 }
 
 const cardNumberInput = document.getElementById("pan");
@@ -70,7 +70,7 @@ const cardNumberInputWrapper = document.querySelector(
 cardNumberInput.addEventListener("blur", function () {
   const cardNumber = cardNumberInput.value.replace(/\s/g, "");
   // Check if card number is 16 digits and passes Luhn algorithm
-  if (cardNumber.length !== 16 || !isValidCardNumber(cardNumber)) {
+  if (!isValidCardNumber(cardNumber)) {
     cardNumberInputWrapper.classList.add("validation_error");
   } else {
     cardNumberInputWrapper.classList.remove("validation_error");
@@ -93,6 +93,8 @@ function handleExpDate(e) {
   }
 
   e.target.value = input.slice(0, 7);
+
+  updateButtonState();
 }
 
 // Function to validate expiration date (MM/YY)
@@ -128,6 +130,8 @@ expDateInput.addEventListener("blur", function () {
 function handleCvv(e) {
   let input = e.target.value.replace(/\D/g, "");
   e.target.value = input.slice(0, 3);
+
+  updateButtonState();
 }
 
 const cvvInput = document.getElementById("cardCvv");
@@ -141,6 +145,21 @@ cvvInput.addEventListener("blur", function () {
     cvvInputWrapper.classList.remove("validation_error");
   }
 });
+
+function updateButtonState() {
+  const cardNumber = cardNumberInput.value.replace(/\s/g, "");
+  const expDate = expDateInput.value;
+  const cvv = cvvInput.value;
+
+  const allValid =
+    isValidCardNumber(cardNumber) &&
+    isValidExpirationDate(expDate) &&
+    cvv.length === 3;
+
+  const submitButton = document.getElementById("cardInfoSubmitBtn");
+  submitButton.classList.toggle("invalid", !allValid);
+  submitButton.disabled = false;
+}
 
 // mask primary account number aka pan on the second step
 const panElement = document.querySelector(".pan");
