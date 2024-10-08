@@ -1,37 +1,53 @@
-// close window
+// get DOM elements
 const modal = document.querySelector('.modal_contents_container');
-function handleClose() {
-  modal.classList.add('hidden');
-}
 
-// price amount format with 2 zeros
+const visaIcon = document.getElementById('pan-icon-visa');
+const mcIcon = document.getElementById('pan-icon-mc');
 
-const formatToFixed = (selector) => {
-  const element = document.querySelector(selector);
-  element.textContent = parseFloat(element.textContent).toFixed(2);
+const cardNumberInput = document.getElementById('pan');
+const cardNumberInputWrapper = document.querySelector(
+  '.card_info_input_wrapper'
+);
+
+const expDateInput = document.getElementById('expDate');
+const expDateInputWrapper = document.getElementById('expDateWrapper');
+
+const cvvInput = document.getElementById('cardCvv');
+const cvvInputWrapper = document.getElementById('cvvWrapper');
+
+// Close modal functionality
+const handleClose = () => modal.classList.add('hidden');
+
+// Utility function to format prices to 2 decimal places
+const formatToFixed = (items) => {
+  items.forEach((item) => {
+    const element = document.querySelector(item);
+    if (element) {
+      element.textContent = parseFloat(element.textContent).toFixed(2);
+    }
+  });
 };
-
-formatToFixed('.amount');
-formatToFixed('.btn_amount');
-formatToFixed('.check_amount');
+// Format elements
+formatToFixed(['.amount', '.btn_amount', '.check_amount']);
 
 // Determine card type
-function getCardType(cardNumber) {
-  let cardType = null;
-  if (/^4/.test(cardNumber)) {
-    cardType = 'Visa';
-  } else if (/^5[1-5]/.test(cardNumber)) {
-    cardType = 'MasterCard';
-  }
-  return cardType;
-}
+const getCardType = (cardNumber) => {
+  const types = {
+    Visa: /^4/,
+    MasterCard: /^5[1-5]/,
+  };
+  return (
+    Object.keys(types).find((type) => types[type].test(cardNumber)) || null
+  );
+};
 
-// card number validity based on luhn algorithm
+// Luhn algorithm for card validation
 function isValidCardNumber(cardNumber) {
+  number = cardNumber.replace(/\s/g, '');
   let sum = 0;
   let shouldDouble = false;
-  for (let i = cardNumber.length - 1; i >= 0; i--) {
-    let digit = parseInt(cardNumber[i]);
+  for (let i = number.length - 1; i >= 0; i--) {
+    let digit = parseInt(number[i]);
     if (shouldDouble) {
       digit *= 2;
       if (digit > 9) digit -= 9;
@@ -40,12 +56,23 @@ function isValidCardNumber(cardNumber) {
     sum += digit;
     shouldDouble = !shouldDouble;
   }
-  return sum % 10 === 0 && cardNumber.length === 16;
+  return sum % 10 === 0 && number.length === 16;
 }
 
-// card number (pan) input format and visa/mc icon
-const visaIcon = document.getElementById('pan-icon-visa');
-const mcIcon = document.getElementById('pan-icon-mc');
+// Function to validate expiration date (MM/YY)
+function isValidExpirationDate(expDate) {
+  const [month, year] = expDate.split('/').map(Number);
+  if (!month || !year || month < 1 || month > 12) return false;
+  const currentDate = new Date();
+  const inputYear = 2000 + year;
+  const inputDate = new Date(inputYear, month - 1);
+
+  return (
+    inputDate >= new Date(currentDate.getFullYear(), currentDate.getMonth())
+  );
+}
+
+// card number (pan) input format and visa/mc icon visibility
 
 function handleCardNumber(e) {
   const input = e.target;
@@ -61,22 +88,6 @@ function handleCardNumber(e) {
   updateButtonState();
 }
 
-const cardNumberInput = document.getElementById('pan');
-const cardNumberInputWrapper = document.querySelector(
-  '.card_info_input_wrapper'
-);
-
-// validate card number on blur event
-cardNumberInput.addEventListener('blur', function () {
-  const cardNumber = cardNumberInput.value.replace(/\s/g, '');
-  // Check if card number is 16 digits and passes Luhn algorithm
-  if (!isValidCardNumber(cardNumber)) {
-    cardNumberInputWrapper.classList.add('validation_error');
-  } else {
-    cardNumberInputWrapper.classList.remove('validation_error');
-  }
-});
-
 // expiry date input format
 
 function handleExpDate(e) {
@@ -91,39 +102,9 @@ function handleExpDate(e) {
   if (input.length > 2) {
     input = input.slice(0, 2) + ' / ' + input.slice(2, 4);
   }
-
   e.target.value = input.slice(0, 7);
-
   updateButtonState();
 }
-
-// Function to validate expiration date (MM/YY)
-function isValidExpirationDate(expDate) {
-  const [month, year] = expDate.split('/').map(Number);
-
-  if (!month || !year || month < 1 || month > 12) return false;
-
-  const currentDate = new Date();
-  const inputYear = 2000 + year;
-  const inputDate = new Date(inputYear, month - 1);
-
-  return (
-    inputDate >= new Date(currentDate.getFullYear(), currentDate.getMonth())
-  );
-}
-
-// Validate expiration date on blur
-const expDateInput = document.getElementById('expDate');
-const expDateInputWrapper = document.getElementById('expDateWrapper');
-
-expDateInput.addEventListener('blur', function () {
-  const expDate = expDateInput.value;
-  if (!isValidExpirationDate(expDate)) {
-    expDateInputWrapper.classList.add('validation_error');
-  } else {
-    expDateInputWrapper.classList.remove('validation_error');
-  }
-});
 
 // CVC/CVV input format
 
@@ -134,9 +115,27 @@ function handleCvv(e) {
   updateButtonState();
 }
 
-const cvvInput = document.getElementById('cardCvv');
-const cvvInputWrapper = document.getElementById('cvvWrapper');
+// validate card number on blur event
+cardNumberInput.addEventListener('blur', function () {
+  const cardNumber = cardNumberInput.value;
+  // Check if card number is 16 digits and passes Luhn algorithm
+  if (!isValidCardNumber(cardNumber)) {
+    cardNumberInputWrapper.classList.add('validation_error');
+  } else {
+    cardNumberInputWrapper.classList.remove('validation_error');
+  }
+});
 
+// Validate expiration date on blur
+expDateInput.addEventListener('blur', function () {
+  const expDate = expDateInput.value;
+  if (!isValidExpirationDate(expDate)) {
+    expDateInputWrapper.classList.add('validation_error');
+  } else {
+    expDateInputWrapper.classList.remove('validation_error');
+  }
+});
+// Validate cvv/cvc date on blur
 cvvInput.addEventListener('blur', function () {
   const cvv = cvvInput.value;
   if (cvv.length !== 3) {
@@ -147,7 +146,7 @@ cvvInput.addEventListener('blur', function () {
 });
 
 function updateButtonState() {
-  const cardNumber = cardNumberInput.value.replace(/\s/g, '');
+  const cardNumber = cardNumberInput.value;
   const expDate = expDateInput.value;
   const cvv = cvvInput.value;
 
@@ -158,7 +157,7 @@ function updateButtonState() {
 
   const submitButton = document.getElementById('cardInfoSubmitBtn');
   submitButton.classList.toggle('invalid', !allValid);
-  allValid ? (submitButton.disabled = false) : (submitButton.disabled = true);
+  submitButton.disabled = !allValid;
 }
 
 // mask primary account number aka pan on the second step
@@ -173,7 +172,6 @@ const panWrapper = document.querySelector('.pan_wrapper');
 const merchantLocation = document.querySelector('.merchant_location');
 const cardInfoForm = document.querySelector('.card_info_form');
 const codeForm = document.querySelector('.code_form');
-
 const codeInput = document.getElementById('code');
 
 function handleCode(e) {
@@ -183,9 +181,7 @@ function handleCode(e) {
   const isCodeValid = e.target.value.length === 6;
 
   submitButton.classList.toggle('invalid', !isCodeValid);
-  isCodeValid
-    ? (submitButton.disabled = false)
-    : (submitButton.disabled = true);
+  submitButton.disabled = !isCodeValid;
 }
 
 const showSecStep = (e) => {
