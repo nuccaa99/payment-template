@@ -83,7 +83,7 @@ function handleExpDate(e) {
   let input = e.target.value.replace(/\D/g, "");
   if (
     (input.length === 1 && input[0] > 1 && input[0] <= 9) ||
-    (input.length === 2 && input[1] > 2)
+    (input.length === 2 && input[0] == 1 && input[1] > 2)
   ) {
     input = "0" + input;
   }
@@ -91,6 +91,7 @@ function handleExpDate(e) {
   if (input.length > 2) {
     input = input.slice(0, 2) + " / " + input.slice(2, 4);
   }
+
   e.target.value = input.slice(0, 7);
 }
 
