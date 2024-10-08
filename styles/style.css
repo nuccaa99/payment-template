@@ -66,9 +66,6 @@ button.invalid {
 /* modal header */
 header {
   padding: 32px 82px;
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center; */
   border-bottom: var(--border);
   position: relative;
 }
@@ -77,6 +74,10 @@ header {
   position: absolute;
   top: 20px;
   right: 24px;
+}
+
+.close_icon:hover {
+  cursor: pointer;
 }
 
 /* merchant amount variables */
@@ -240,6 +241,65 @@ header {
 
 .card_info_input_wrapper.date_cvv {
   width: 50%;
+}
+
+/* popup on cvv */
+
+.popup_wrapper {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e3e6e8;
+}
+
+.popup_icon {
+  color: #9999aa;
+  font-size: 0.6rem;
+  font-family: var(--font-light-caps);
+}
+
+.popup_container {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  width: 191px;
+  background-color: #2b2731;
+  border-radius: 8px;
+  padding: 8px 12px;
+  position: absolute;
+  right: -14px;
+  top: -76px;
+  z-index: 1001;
+  font-size: 14px;
+  font-family: var(--font-regular);
+  color: #fff;
+  text-align: left;
+  line-height: 20px;
+  display: none;
+}
+
+.popup_wrapper:hover {
+  cursor: pointer;
+}
+
+.popup_wrapper:hover .popup_container {
+  display: block;
+}
+
+.popup_container--custom::after {
+  content: "";
+  border-width: 6px;
+  border-style: solid;
+  border-color: #2b2731 transparent transparent transparent;
+  position: absolute;
+  right: 16px;
+  bottom: -12px;
 }
 
 .form_btn,
@@ -432,4 +492,6 @@ footer {
 
 .transaction_info_list_item_amount {
   font-size: 24px;
+  font-family: var(--font-bold);
+  color: rgba(26, 29, 31, 1);
 }

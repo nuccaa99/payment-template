@@ -1,10 +1,19 @@
+// close window
+const modal = document.querySelector(".modal_contents_container");
+function handleClose() {
+  modal.classList.add("hidden");
+}
+
 // price amount format with 2 zeros
-const amountElement = document.querySelector(".amount");
-amountElement.textContent = parseFloat(amountElement.textContent).toFixed(2);
-const btnAmountElement = document.querySelector(".btn_amount");
-btnAmountElement.textContent = parseFloat(btnAmountElement.textContent).toFixed(
-  2
-);
+
+const formatToFixed = (selector) => {
+  const element = document.querySelector(selector);
+  element.textContent = parseFloat(element.textContent).toFixed(2);
+};
+
+formatToFixed(".amount");
+formatToFixed(".btn_amount");
+formatToFixed(".check_amount");
 
 //validate card number
 

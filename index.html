@@ -15,11 +15,11 @@
         <!-- header -->
         <header>
           <img src="./assets/images/logo-geo.svg" class="model_header_logo" />
-
           <img
             src="./assets/images/close.svg"
             alt="close icon"
             class="close_icon"
+            onclick="handleClose()"
           />
         </header>
         <div class="scrollable_content">
@@ -108,10 +108,19 @@
                   id="cardCvv"
                   autocomplete="off"
                 />
+                <div class="popup_wrapper">
+                  <span class="popup_icon">?</span>
+                  <div class="popup_container">
+                    <div class="popup_container--custom"></div>
+                    <p>3-ნიშნა კოდი ბარათის უკანა მხარეს</p>
+                  </div>
+                </div>
               </div>
             </div>
             <button type="submit" class="form_btn invalid">
-              გადახდა ( <span class="btn_amount">258</span>₾ )
+              <p>
+                გადახდა ( <span class="btn_amount">258</span> <span>₾</span> )
+              </p>
             </button>
           </form>
           <!-- form on the second step  -->
@@ -135,7 +144,9 @@
               <span>მიიღე ახალი კოდი</span>
             </div>
             <button type="submit" class="form_btn">დადასტურება</button>
-            <button type="submit" class="cancel_btn">გაუქმება</button>
+            <button type="submit" class="cancel_btn" onclick="handleClose()">
+              გაუქმება
+            </button>
           </form>
 
           <!-- section on third step -->
@@ -189,12 +200,17 @@
                 </ul>
               </div>
               <div class="transaction_info_list_item">
-                <span>თანხა:</span
-                ><span class="transaction_info_list_item_amount">20.00 ₾</span>
+                <span>თანხა:</span>
+                <p class="transaction_info_list_item_amount">
+                  <span class="check_amount">20</span>
+                  <span>₾</span>
+                </p>
               </div>
             </div>
             <div class="success_btns_wrapper">
-              <button type="submit" class="form_btn">დახურვა</button>
+              <button type="submit" class="form_btn" onclick="handleClose()">
+                დახურვა
+              </button>
               <button type="submit" class="receipt_btn">ქვითრის ბეჭდვა</button>
             </div>
           </div>
