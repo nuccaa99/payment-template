@@ -84,6 +84,8 @@ header {
   padding: 8px 82px 16px 82px;
   display: flex;
   justify-content: space-between;
+  row-gap: 16px;
+  flex-wrap: wrap;
 }
 
 .merchant_wrapper {
@@ -276,12 +278,13 @@ footer {
 
 .footer_img_wrapper {
   width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer_img_wrapper > img {
-  /* width: 100%;
-  height: 100%; */
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .footer_copy_wrapper > img {
@@ -303,7 +306,6 @@ footer {
 
 .code_form {
   display: none;
-
   flex-direction: column;
   padding-inline: 82px;
   padding-bottom: 16px;
@@ -358,7 +360,7 @@ footer {
 
 .cancel_btn {
   background-color: transparent;
-  font-family: var(--font);
+  font-family: var(--font-light-caps);
   color: var(--btn-background);
   margin-top: 8px;
 }
@@ -396,7 +398,7 @@ footer {
 }
 
 .transaction_info > h3 {
-  font-family: var(--font-bold);
+  font-family: var(--font-bold-caps);
   font-size: 16px;
   line-height: 24px;
   padding-bottom: 8px;
@@ -405,8 +407,6 @@ footer {
 .transaction_info > ul {
   font-size: 16px;
   line-height: 24px;
-
-  display: flex;
   display: flex;
   flex-direction: column;
   row-gap: 8px;
@@ -416,7 +416,9 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  column-gap: 10px;
 }
+
 .transaction_info_list_item > span:first-child {
   font-family: var(--font-light);
   color: rgba(26, 29, 31, 0.7);
@@ -425,6 +427,7 @@ footer {
 .transaction_info_list_item > span:nth-child(2) {
   font-family: var(--font-bold);
   color: rgba(26, 29, 31, 1);
+  text-align: end;
 }
 
 .transaction_info_list_item_amount {

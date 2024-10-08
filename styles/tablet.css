@@ -24,7 +24,9 @@
   }
 
   .merchant_amount_container,
-  .card_info_form {
+  .card_info_form,
+  .code_form,
+  .success_card_container {
     padding: 0px 24px;
   }
 
@@ -46,7 +48,8 @@
   .merchant_location {
     font-size: 14px;
   }
-  .card_info_form > h3 {
+  .card_info_form > h3,
+  .code_form_label {
     font-size: 14px;
   }
 
@@ -59,4 +62,13 @@
     padding: 24px 24px 46px 24px;
   }
 
+  /* third step */
+  .transaction_info > ul,
+  .transaction_info_list_item {
+    font-size: 14px;
+  }
+
+  .transaction_info_list_item_amount {
+    font-size: 20px;
+  }
 }

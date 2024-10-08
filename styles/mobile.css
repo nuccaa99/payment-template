@@ -10,7 +10,18 @@
   header,
   .merchant_amount_container,
   .card_info_form,
+  .code_form,
+  .success_card_container,
   footer {
     padding-inline: 12px;
+  }
+
+  .amount,
+  .amount_currency_symbol {
+    font-size: 20px;
+  }
+
+  .close_icon {
+    right: 12px;
   }
 }
