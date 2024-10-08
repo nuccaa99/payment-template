@@ -62,7 +62,7 @@
             <div class="card_info_input_wrapper">
               <label for="pan" class="card_info_label">ბარათის ნომერი</label>
               <input
-                oninput="handlePanFormatting(event)"
+                oninput="handleCardNumber(event)"
                 minlength="19"
                 maxlength="19"
                 class="card_info_input pan"
@@ -85,17 +85,17 @@
               />
             </div>
             <div class="card_info_date_cvv_wrapper">
-              <div class="card_info_input_wrapper date_cvv">
-                <label for="cardDate" class="card_info_label"
+              <div class="card_info_input_wrapper date_cvv" id="expDateWrapper">
+                <label for="expDate" class="card_info_label"
                   >მოქმედების ვადა</label
                 >
                 <input
                   maxlength="7"
-                  oninput="handleCardExpiryFormatting(event)"
+                  oninput="handleExpDate(event)"
                   class="card_info_input card_date"
                   type="text"
-                  name="cardDate"
-                  id="cardDate"
+                  name="expDate"
+                  id="expDate"
                   autocomplete="off"
                 />
               </div>

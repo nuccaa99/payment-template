@@ -15,127 +15,112 @@ formatToFixed(".amount");
 formatToFixed(".btn_amount");
 formatToFixed(".check_amount");
 
-//validate card number
-
-function validateCreditCard(cardNumber) {
-  if (cardNumber.length < 13 || cardNumber.length > 19) {
-    return { isValid: false, cardType: null };
-  }
-  //Luhn algorithm
-  let sum = 0;
-  let isEven = false;
-  for (let i = cardNumber.length - 1; i >= 0; i--) {
-    let digit = parseInt(cardNumber.charAt(i), 10);
-
-    if (isEven) {
-      digit *= 2;
-      if (digit > 9) {
-        digit -= 9;
-      }
-    }
-    sum += digit;
-    isEven = !isEven;
-  }
-  const isValid = sum % 10 === 0;
-  // Determine card type
+// Determine card type
+function getCardType(cardNumber) {
   let cardType = null;
-  if (isValid) {
-    if (/^4/.test(cardNumber)) {
-      cardType = "Visa";
-    } else if (/^5[1-5]/.test(cardNumber)) {
-      cardType = "MasterCard";
-    }
+  if (/^4/.test(cardNumber)) {
+    cardType = "Visa";
+  } else if (/^5[1-5]/.test(cardNumber)) {
+    cardType = "MasterCard";
   }
-  return { isValid, cardType };
+  return cardType;
+}
+
+// card number validity based on luhn algorithm
+function isValidCardNumber(cardNumber) {
+  const sanitizedCardNumber = cardNumber.replace(/\D/g, "");
+  let sum = 0;
+  let shouldDouble = false;
+  for (let i = sanitizedCardNumber.length - 1; i >= 0; i--) {
+    let digit = parseInt(sanitizedCardNumber[i]);
+    if (shouldDouble) {
+      digit *= 2;
+      if (digit > 9) digit -= 9;
+    }
+
+    sum += digit;
+    shouldDouble = !shouldDouble;
+  }
+
+  return sum % 10 === 0;
 }
 
 // card number (pan) input format and visa/mc icon
 const visaIcon = document.getElementById("pan-icon-visa");
 const mcIcon = document.getElementById("pan-icon-mc");
 
-function handlePanFormatting(e) {
+function handleCardNumber(e) {
   const input = e.target;
-
   input.value = input.value
     .replace(/\D/g, "")
     .replace(/(\d{4})(?=\d)/g, "$1 ")
     .trim();
-
-  const { isValid, cardType } = validateCreditCard(
-    input.value.replace(/\s/g, "")
-  );
+  const cardType = getCardType(input.value.replace(/\s/g, ""));
 
   visaIcon.classList.toggle("hidden", cardType !== "Visa");
   mcIcon.classList.toggle("hidden", cardType !== "MasterCard");
-
-  if (input.value.length > 0) {
-    if (isValid) {
-      input.parentElement.classList.remove("validation_error");
-    } else {
-      input.parentElement.classList.add("validation_error");
-    }
-  } else {
-    input.parentElement.classList.remove("validation_error");
-  }
-  console.log(input.value.length);
-  if (isValid && input.value.length === 19) {
-    document.getElementById("cardDate").focus();
-  }
 }
 
-// card expiry date input format
+const cardNumberInput = document.getElementById("pan");
+const cardNumberInputWrapper = document.querySelector(
+  ".card_info_input_wrapper"
+);
 
-function validateCardExpiry(expiryDate) {
-  const [month, year] = expiryDate.split("/").map((item) => item.trim());
-
-  if (!month || !year || month.length !== 2 || year.length !== 2) {
-    return { isValid: false };
+// validate card number on blur event
+cardNumberInput.addEventListener("blur", function () {
+  const cardNumber = cardNumberInput.value.replace(/\s/g, "");
+  // Check if card number is 16 digits and passes Luhn algorithm
+  if (cardNumber.length !== 16 || !isValidCardNumber(cardNumber)) {
+    cardNumberInputWrapper.classList.add("validation_error");
+  } else {
+    cardNumberInputWrapper.classList.remove("validation_error");
   }
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear() % 100;
-  const currentMonth = currentDate.getMonth() + 1;
+});
 
-  const expMonth = parseInt(month, 10);
-  const expYear = parseInt(year, 10);
+// expiry date input format
 
-  if (expMonth < 1 || expMonth > 12) {
-    return { isValid: false };
-  }
-
+function handleExpDate(e) {
+  let input = e.target.value.replace(/\D/g, "");
   if (
-    expYear < currentYear ||
-    (expYear === currentYear && expMonth < currentMonth)
+    (input.length === 1 && input[0] > 1 && input[0] <= 9) ||
+    (input.length === 2 && input[1] > 2)
   ) {
-    return { isValid: false };
+    input = "0" + input;
   }
 
-  return { isValid: true };
+  if (input.length > 2) {
+    input = input.slice(0, 2) + " / " + input.slice(2, 4);
+  }
+  e.target.value = input.slice(0, 7);
 }
 
-function handleCardExpiryFormatting(e) {
-  const input = e.target;
-  let value = input.value.replace(/\D/g, "");
-  value = value.slice(0, 6);
-  if (value.length > 2) {
-    value = value.slice(0, 2) + " / " + value.slice(2);
-  }
-  input.value = value;
-  const { isValid } = validateCardExpiry(input.value);
+// Function to validate expiration date (MM/YY)
+function isValidExpirationDate(expDate) {
+  const [month, year] = expDate.split("/").map(Number);
 
-  if (input.value.length > 0) {
-    if (isValid) {
-      input.parentElement.classList.remove("validation_error");
-    } else {
-      input.parentElement.classList.add("validation_error");
-    }
+  if (!month || !year || month < 1 || month > 12) return false;
+
+  const currentDate = new Date();
+  const inputYear = 2000 + year;
+  const inputDate = new Date(inputYear, month - 1);
+
+  return (
+    inputDate >= new Date(currentDate.getFullYear(), currentDate.getMonth())
+  );
+}
+
+// Validate expiration date on blur
+const expDateInput = document.getElementById("expDate");
+const expDateInputWrapper = document.getElementById("expDateWrapper");
+
+expDateInput.addEventListener("blur", function () {
+  const expDate = expDateInput.value;
+  if (!isValidExpirationDate(expDate)) {
+    expDateInputWrapper.classList.add("validation_error");
   } else {
-    input.parentElement.classList.remove("validation_error");
+    expDateInputWrapper.classList.remove("validation_error");
   }
-
-  if (input.value.length === 7) {
-    document.getElementById("cardCvv").focus();
-  }
-}
+});
 
 // mask primary account number aka pan on the second step
 const panElement = document.querySelector(".pan");
