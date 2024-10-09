@@ -16,6 +16,10 @@ button.invalid {
   border: 1px solid var(--border-color-invalid);
 }
 
+.hidden {
+  display: none;
+}
+
 /* modal */
 .modal {
   top: 0;
@@ -157,20 +161,20 @@ header {
   text-transform: capitalize;
 }
 
-.amount_pan_container {
-  display: flex;
-  flex-direction: column;
-  row-gap: 16px;
-}
+.amount_pan_container,
 .amount_wrapper,
-.pan_wrapper {
+.pan_wrapper,
+.transaction_info_wrapper,
+.card_info_form {
   display: flex;
   flex-direction: column;
   row-gap: 16px;
 }
+
 .pan_wrapper {
   display: none;
 }
+
 .amount_title,
 .pan_title {
   font-family: var(--font-regular);
@@ -198,9 +202,6 @@ header {
 /* card info */
 .card_info_form {
   padding: 16px 82px 0px 82px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 16px;
 }
 
 .card_info_form > h3 {
@@ -235,13 +236,6 @@ header {
   right: 16px;
   top: 50%;
   transform: translateY(-50%);
-}
-
-.hidden {
-  display: none;
-}
-.card_info_input.invalid {
-  border: 1px solid var(--border-color-invalid);
 }
 
 .card_info_label {
@@ -474,12 +468,6 @@ footer {
   margin-top: 16px;
   background-color: var(--sec-btn-background);
   color: var(--sec-btn-color);
-}
-
-.transaction_info_wrapper {
-  display: flex;
-  flex-direction: column;
-  row-gap: 16px;
 }
 
 .transaction_info > h3 {
