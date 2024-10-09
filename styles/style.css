@@ -4,6 +4,10 @@ button:hover {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: default;
+}
+
 button.invalid {
   opacity: 0.45;
 }
@@ -72,7 +76,7 @@ header {
 
 /* icon for en */
 
-.model_header_logo_en {
+.modal_header_logo_en {
   width: 196px;
   height: 30.9px;
 }
