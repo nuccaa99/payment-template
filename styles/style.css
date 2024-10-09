@@ -48,6 +48,7 @@ button.invalid {
   row-gap: 24px;
   overflow-y: auto;
   scroll-behavior: smooth;
+  -webkit-scroll-behavior: smooth;
 }
 
 /* scrollbar */
@@ -65,6 +66,14 @@ button.invalid {
 }
 .scrollable_content::-webkit-scrollbar-track {
   background-color: transparent;
+}
+
+/* Firefox only */
+@-moz-document url-prefix() {
+  .scrollable_content {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--txt-color-ultra-light) transparent; /* Firefox */
+  }
 }
 
 /* modal header */
