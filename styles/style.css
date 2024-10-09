@@ -264,6 +264,7 @@ header {
   color: #9999aa;
   font-size: 0.6rem;
   font-family: var(--font-light-caps);
+  transition: color 0.25s ease-in-out;
 }
 
 .popup_container {
@@ -290,6 +291,10 @@ header {
 
 .popup_wrapper:hover .popup_container {
   display: block;
+}
+
+.popup_wrapper:hover .popup_icon {
+  color: var(--sec-btn-color);
 }
 
 .popup_container--custom::after {
