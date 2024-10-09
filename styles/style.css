@@ -70,6 +70,13 @@ header {
   position: relative;
 }
 
+/* icon for en */
+
+.model_header_logo_en {
+  width: 196px;
+  height: 30.9px;
+}
+
 .close_icon {
   position: absolute;
   top: 20px;
