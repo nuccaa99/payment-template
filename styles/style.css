@@ -16,10 +16,6 @@ button.invalid {
   border: 1px solid var(--border-color-invalid);
 }
 
-.hidden {
-  display: none;
-}
-
 /* modal */
 .modal {
   top: 0;
@@ -507,4 +503,8 @@ footer {
   font-size: 24px;
   font-family: var(--font-bold);
   color: rgba(26, 29, 31, 1);
+}
+
+.hidden {
+  display: none;
 }
